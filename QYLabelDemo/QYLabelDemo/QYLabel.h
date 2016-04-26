@@ -12,10 +12,16 @@
 typedef  void(^QYTapHandler)(QYLabel *label,NSString * string,NSRange range);
 
 //闭包属性用于回调
-@property (nonatomic, strong) QYTapHandler linkTapHandler;
-@property (nonatomic, strong) QYTapHandler topicTapHandler;
-@property (nonatomic, strong) QYTapHandler userTapHandler;
+@property (nonatomic, strong) QYTapHandler userStringTapHandler;
 
 //用于修改匹配的字体颜色
 @property (nonatomic, strong) UIColor *matchTextColor;
+
+//保存用户需要匹配的字符串
+@property (nonatomic, strong) NSMutableArray *addStringM;
+
+//是否匹配@ ## http链接
+@property (nonatomic, assign) BOOL showTopic;
+@property (nonatomic, assign) BOOL showLink;
+@property (nonatomic, assign) BOOL showUser;
 @end

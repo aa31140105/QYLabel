@@ -12,7 +12,8 @@ typedef enum {
     noneHandle = 0,
     userHandle = 1,
     topicHandle = 2,
-    linkHandle = 3
+    linkHandle = 3,
+    userStringHandle = 4
     
 }TapHandlerType;
 
@@ -22,9 +23,10 @@ typedef enum {
 @property (nonatomic, strong) NSTextContainer *textContainer;
 
 //用于记录下标值(NSTextCheckingResult数组)
-@property (nonatomic, strong) NSArray *linkRanges;
-@property (nonatomic, strong) NSArray *userRanges;
-@property (nonatomic, strong) NSArray *topicRanges;
+//@property (nonatomic, strong) NSArray *linkRanges;
+//@property (nonatomic, strong) NSArray *userRanges;
+//@property (nonatomic, strong) NSArray *topicRanges;
+@property (nonatomic, strong) NSMutableArray *userString;
 
 //记录用户选择的range
 @property (nonatomic, assign) NSRange selectRange;
@@ -72,6 +74,39 @@ typedef enum {
     return _textContainer;
 }
 
+- (NSMutableArray *)userString {
+    if (_userString == nil) {
+        _userString = [NSMutableArray array];
+    }
+    return _userString;
+}
+
+- (NSMutableArray *)addStringM {
+    if (_addStringM == nil) {
+        _addStringM = [NSMutableArray array];
+    }
+    return _addStringM;
+}
+
+
+#pragma mark - 记录用户是否要匹配@ ## http
+-(void)setShowTopic:(BOOL)showTopic {
+    
+    _showTopic = showTopic;
+    [self prepareText];
+}
+
+- (void)setShowUser:(BOOL)showUser {
+
+    _showUser = showUser;
+    [self prepareText];
+}
+
+- (void)setShowLink:(BOOL)showLink {
+    _showLink = showLink;
+    [self prepareText];
+}
+
 -(void)setText:(NSString *)text{
     //写super很重要
     [super setText:text];
@@ -95,6 +130,8 @@ typedef enum {
     [super setAttributedText:attributedText];
     [self prepareText];
 }
+
+
 
 - (void)setMatchTextColor:(UIColor *)matchTextColor{
     
@@ -179,34 +216,50 @@ typedef enum {
     //设置换行模型
     NSMutableAttributedString *attrStringM = [self addLineBreak:attrString];
     
-    //设置字体大小(这里字体大小改了,但是界面显示不了)
+    //设置字体大小
     [attrStringM addAttribute:NSFontAttributeName value:self.font range:NSMakeRange(0, attrStringM.length)];
-
 //    设置textStorage的内容
     [self.textStorage setAttributedString:attrStringM];
+    NSLog(@"%@",self.textStorage.string);
 
-//    匹配URL
-    self.linkRanges = [self getLinkRanges];
-    for (NSTextCheckingResult *res in self.linkRanges) {
-        NSRange range = res.range;
-    [self.textStorage addAttribute:NSForegroundColorAttributeName value:self.matchTextColor range:range];
 
+    
+    //匹配自定义字符串
+    [self.addStringM removeObjectsInArray:@[@"@[\\u4e00-\\u9fa5a-zA-Z0-9_-]*",@"@[\\u4e00-\\u9fa5a-zA-Z0-9_-]*"]];
+    [self.userString removeAllObjects];
+    if (self.showUser == YES) {
+        [self.addStringM insertObject:@"@[\\u4e00-\\u9fa5a-zA-Z0-9_-]*" atIndex:0];
+    } else {
+        [self.addStringM removeObject:@"@[\\u4e00-\\u9fa5a-zA-Z0-9_-]*"];
     }
     
-    //匹配用户
-    self.userRanges = [self getRanges:@"@[\\u4e00-\\u9fa5a-zA-Z0-9_-]*"];
-    for (NSTextCheckingResult *res in self.userRanges) {
-        NSRange range = res.range;
-        [self.textStorage addAttribute:NSForegroundColorAttributeName value:self.matchTextColor range:range];
-
+    if (self.showTopic == YES) {
+        [self.addStringM insertObject:@"#.*?#" atIndex:0];
+    }else {
+        [self.addStringM removeObject:@"#.*?#"];
     }
     
-    //匹配话题
-    self.topicRanges = [self getRanges:@"#.*?#"];
-    for (NSTextCheckingResult *res in self.topicRanges) {
-        NSRange range = res.range;
-      [self.textStorage addAttribute:NSForegroundColorAttributeName value:self.matchTextColor range:range];
+    if (_addStringM.count > 0 || self.showLink == YES) {
         
+        for (int i = 0; i < _addStringM.count; ++i) {
+            [self.userString addObject:[self getRanges:_addStringM[i]]];
+        }
+        if (self.showLink == YES) {
+            [self.userString insertObject:[self getLinkRanges] atIndex:0];
+        }else {
+            [self.userString removeObject:[self getLinkRanges]];
+        }
+        
+        for (NSArray *arrar in self.userString) {
+            
+            for (NSTextCheckingResult *res in arrar) {
+                NSRange range = res.range;
+                [self.textStorage addAttribute:NSForegroundColorAttributeName value:self.matchTextColor range:range];
+            }
+        }
+    }else {
+     //如果没有设置匹配,则改为默认颜色
+        [self.textStorage addAttribute:NSForegroundColorAttributeName value:self.textColor range:NSMakeRange(0, self.textStorage.length)];
     }
     
     //设置多行
@@ -228,6 +281,7 @@ typedef enum {
    return [self getRangesFromResult:regex];
 }
 
+//处理http链接
 - (NSArray *)getLinkRanges {
     NSError *error = nil;
     NSDataDetector *detector = [[NSDataDetector alloc]initWithTypes:NSTextCheckingTypeLink error:&error];
@@ -291,9 +345,8 @@ typedef enum {
     UITouch *touch = [touches anyObject];
     CGPoint selectedPoint = [touch locationInView:self];
     
-    //获取该点对于的字符串的range
+    //获取该点对应的字符串的range
     self.selectRange = [self getSelectRange:selectedPoint];
-    
     //是否处理了事件
     if (self.selectRange.length == 0) {
         [super touchesBegan:touches withEvent:event];
@@ -320,19 +373,9 @@ typedef enum {
     
     //回调
     switch (self.tapHandlerType) {
-        case linkHandle:
-            if (self.linkTapHandler != nil) {
-                self.linkTapHandler(self,contentText,self.selectRange);
-            }
-            break;
-        case userHandle:
-            if (self.userTapHandler != nil) {
-                self.userTapHandler(self,contentText,self.selectRange);
-            }
-            break;
-        case topicHandle:
-            if (self.topicTapHandler != nil) {
-                self.topicTapHandler(self,contentText,self.selectRange);
+        case userStringHandle:
+            if (self.userStringTapHandler != nil) {
+                self.userStringTapHandler(self,contentText,self.selectRange);
             }
             break;
             
@@ -349,32 +392,20 @@ typedef enum {
     }
     // 1.获取选中点所在的下标值(index)
     NSInteger index = [self.layoutManager glyphIndexForPoint:selectedPoint inTextContainer:self.textContainer];
-    // 判断是否是一个链接
-    for (NSTextCheckingResult *res in self.linkRanges) {
-        if (index > res.range.location && index < res.range.location + res.range.length) {
-            [self setNeedsDisplay];
-            self.tapHandlerType = linkHandle;
-            
-            return res.range;
+    
+    //判断是不是用户自定义的字符串
+    for (NSInteger i = self.userString.count-1; i >= 0; --i) {
+        
+        for (NSTextCheckingResult *res in self.userString[i]) {
+            if (index >= res.range.location && index < res.range.location + res.range.length) {
+                [self setNeedsDisplay];
+                self.tapHandlerType = userStringHandle;
+                return res.range;
+            }
         }
     }
     
-    //判断是否是一个@用户
-    for (NSTextCheckingResult *res in self.userRanges) {
-        if (index > res.range.location && index < res.range.location + res.range.length) {
-            [self setNeedsDisplay];
-            self.tapHandlerType = topicHandle;
-            return res.range;
-        }
-    }
-    //判断是否是一个#话题#
-    for (NSTextCheckingResult *res in self.topicRanges) {
-        if (index > res.range.location && index < res.range.location + res.range.length) {
-            [self setNeedsDisplay];
-            self.tapHandlerType = topicHandle;
-            return res.range;
-        }
-    }
+
     return NSMakeRange(0, 0);
 }
 
