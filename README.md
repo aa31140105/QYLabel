@@ -2,7 +2,7 @@
 匹配出UILabel的@用户、#话题#、http链接和自定义字符匹配等
 
 ####截图
-![image](https://github.com/aa31140105/QYLabelDemo/raw/master/Screenshot/2CB93FEA-DB6E-47A4-8A9C-BE027DB3466E.png)
+![image](https://github.com/aa31140105/QYLabel/blob/master/QYLabelDemo/QYLabelDemo/Screenshot/2CB93FEA-DB6E-47A4-8A9C-BE027DB3466E.png)
 
 #####import "ViewController.h"
 #####import "QYLabel.h"
