@@ -26,7 +26,7 @@
     //闭包回调打印 
     self.myLabel.userStringTapHandler = ^(UILabel *label,NSString *string,NSRange range){
         NSLog(@"string = %@,range.location = %lu,range.length = %lu",string,range.location,range.length);
-    };
+    }; 
 
 }
 
