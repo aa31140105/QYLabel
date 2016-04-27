@@ -1,11 +1,11 @@
 # QYLabel
 匹配出UILabel的@用户、#话题#、http链接和自定义字符匹配等
 
-#import "ViewController.h"
-#import "QYLabel.h"
+#####import "ViewController.h"
+#####import "QYLabel.h"
 /** 设置颜色的RGB值 */
-#define QYColor(r,g,b) [UIColor colorWithRed:(r) / 256.0 green:(g) / 256.0 blue:(b) / 256.0 alpha:1]
-#define QYRandomColor QYColor(arc4random_uniform(255), arc4random_uniform(255), arc4random_uniform(255))
+#####define QYColor(r,g,b) [UIColor colorWithRed:(r) / 256.0 green:(g) / 256.0 blue:(b) / 256.0 alpha:1]
+#####define QYRandomColor QYColor(arc4random_uniform(255), arc4random_uniform(255), arc4random_uniform(255))
 @interface ViewController ()
 
 @property (weak, nonatomic) IBOutlet QYLabel *myLabel;
