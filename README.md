@@ -1,45 +1,68 @@
 # QYLabel
-匹配出UILabel的@用户、#话题#、http链接等
+匹配出UILabel的@用户、#话题#、http链接和自定义字符匹配等
 
-#pragma mark - 代码创建的QYLabel
-QYLabel *label = [[QYLabel alloc]init];
-label.frame = CGRectMake(0 ,200, 400, 100);
-label.text = @"作者:@aa31140105 话题:#Label字符串识别# 网址:https://github.com/aa31140105/QYLabel";
-label.matchTextColor = [UIColor redColor];
-[self.view addSubview:label];
+#import "ViewController.h"
+#import "QYLabel.h"
+/** 设置颜色的RGB值 */
+#define QYColor(r,g,b) [UIColor colorWithRed:(r) / 256.0 green:(g) / 256.0 blue:(b) / 256.0 alpha:1]
+#define QYRandomColor QYColor(arc4random_uniform(255), arc4random_uniform(255), arc4random_uniform(255))
+@interface ViewController ()
 
-//block回调
-label.linkTapHandler = ^(UILabel *label,NSString *string,NSRange range){
-
-NSLog(@"label = %@,string = %@,range.location = %lu,range.length = %lu",label,string,range.location,range.length);
-[[UIApplication sharedApplication] openURL:[NSURL URLWithString:string]];
-
-};
-
-label.userTapHandler = ^(UILabel *label,NSString *string,NSRange range){
-NSLog(@"label = %@,string = %@,range.location = %lu,range.length = %lu",label,string,range.location,range.length);
-};
-
-label.topicTapHandler = ^(UILabel *label,NSString *string,NSRange range){
-NSLog(@"label = %@,string = %@,range.location = %lu,range.length = %lu",label,string,range.location,range.length);
-};
+@property (weak, nonatomic) IBOutlet QYLabel *myLabel;
+@property (weak, nonatomic) IBOutlet UITextField *myTextFidle;
 
 
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    //闭包回调打印 
+    self.myLabel.userStringTapHandler = ^(UILabel *label,NSString *string,NSRange range){
+        NSLog(@"string = %@,range.location = %lu,range.length = %lu",string,range.location,range.length);
+    }; 
+
+}
+
+//匹配话题
+- (IBAction)matchTopic:(id)sender {
+    self.myLabel.showTopic = YES;
+}
+//取消匹配话题
+- (IBAction)cancelTopic:(id)sender {
+    self.myLabel.showTopic = NO;
+}
+//取消匹配用户
+- (IBAction)cancelUser:(id)sender {
+    self.myLabel.showUser = NO;
+}
+//匹配用户
+- (IBAction)matchUser:(id)sender {
+    self.myLabel.showUser = YES;
+}
+//取消匹配链接
+- (IBAction)cancelLink:(id)sender {
+    self.myLabel.showLink = NO;
+}
+//匹配链接
+- (IBAction)matchLink:(id)sender {
+    self.myLabel.showLink = YES;
+}
+//设置随机颜色
+- (IBAction)matchTextColor:(id)sender {
+    self.myLabel.matchTextColor = QYRandomColor;
+}
 
 
-#pragma mark - storyboard创建的QYLabel
+//添加自定义字符匹配
+- (IBAction)addMyString:(id)sender {
+    
+    if (self.myTextFidle.text.length > 0 && ![self.myTextFidle.text isEqual: @""]) {
+        [self.myLabel.addStringM addObject:self.myTextFidle.text];
+        self.myLabel.text = [NSString stringWithFormat:@"%@%@",self.myTextFidle.text,self.myLabel.text];
+        
+    }
+}
 
-self.demoLabel.linkTapHandler = ^(UILabel *label,NSString *string,NSRange range){
-
-NSLog(@"label = %@,string = %@,range.location = %lu,range.length = %lu",label,string,range.location,range.length);
-[[UIApplication sharedApplication] openURL:[NSURL URLWithString:string]];
-
-};
-
-self.demoLabel.userTapHandler = ^(UILabel *label,NSString *string,NSRange range){
-NSLog(@"label = %@,string = %@,range.location = %lu,range.length = %lu",label,string,range.location,range.length);
-};
-
-self.demoLabel.topicTapHandler = ^(UILabel *label,NSString *string,NSRange range){
-NSLog(@"label = %@,string = %@,range.location = %lu,range.length = %lu",label,string,range.location,range.length);
-};
+@end
