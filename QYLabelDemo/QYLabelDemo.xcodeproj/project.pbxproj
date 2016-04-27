@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C0314D51CD048B80072AB99 /* 2CB93FEA-DB6E-47A4-8A9C-BE027DB3466E.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C0314D41CD048B80072AB99 /* 2CB93FEA-DB6E-47A4-8A9C-BE027DB3466E.png */; };
 		0CC0BFE61CCF1AF6000E2423 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC0BFE51CCF1AF6000E2423 /* main.m */; };
 		0CC0BFE91CCF1AF6000E2423 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC0BFE81CCF1AF6000E2423 /* AppDelegate.m */; };
 		0CC0BFEC1CCF1AF6000E2423 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC0BFEB1CCF1AF6000E2423 /* ViewController.m */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C0314D41CD048B80072AB99 /* 2CB93FEA-DB6E-47A4-8A9C-BE027DB3466E.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2CB93FEA-DB6E-47A4-8A9C-BE027DB3466E.png"; sourceTree = "<group>"; };
 		0CC0BFE11CCF1AF6000E2423 /* QYLabelDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QYLabelDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CC0BFE51CCF1AF6000E2423 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0CC0BFE71CCF1AF6000E2423 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -81,6 +83,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C0314D31CD048B80072AB99 /* Screenshot */ = {
+			isa = PBXGroup;
+			children = (
+				0C0314D41CD048B80072AB99 /* 2CB93FEA-DB6E-47A4-8A9C-BE027DB3466E.png */,
+			);
+			path = Screenshot;
+			sourceTree = "<group>";
+		};
 		0CC0BFD81CCF1AF6000E2423 = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +124,7 @@
 				0CC0BFF01CCF1AF6000E2423 /* Assets.xcassets */,
 				0CC0BFF21CCF1AF6000E2423 /* LaunchScreen.storyboard */,
 				0CC0BFF51CCF1AF6000E2423 /* Info.plist */,
+				0C0314D31CD048B80072AB99 /* Screenshot */,
 				0CC0BFE41CCF1AF6000E2423 /* Supporting Files */,
 			);
 			path = QYLabelDemo;
@@ -250,6 +261,7 @@
 			files = (
 				0CC0BFF41CCF1AF6000E2423 /* LaunchScreen.storyboard in Resources */,
 				0CC0BFF11CCF1AF6000E2423 /* Assets.xcassets in Resources */,
+				0C0314D51CD048B80072AB99 /* 2CB93FEA-DB6E-47A4-8A9C-BE027DB3466E.png in Resources */,
 				0CC0BFEF1CCF1AF6000E2423 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -504,6 +516,7 @@
 				0CC0C0101CCF1AF6000E2423 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0CC0C0111CCF1AF6000E2423 /* Build configuration list for PBXNativeTarget "QYLabelDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -512,6 +525,7 @@
 				0CC0C0131CCF1AF6000E2423 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0CC0C0141CCF1AF6000E2423 /* Build configuration list for PBXNativeTarget "QYLabelDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -520,6 +534,7 @@
 				0CC0C0161CCF1AF6000E2423 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
