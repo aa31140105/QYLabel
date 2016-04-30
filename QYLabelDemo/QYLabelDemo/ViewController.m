@@ -14,8 +14,14 @@
 @interface ViewController ()
 
 @property (weak, nonatomic) IBOutlet QYLabel *myLabel;
-@property (weak, nonatomic) IBOutlet UITextField *myTextFidle;
 
+@property (weak, nonatomic) IBOutlet UITextField *textField;
+
+@property (weak, nonatomic) IBOutlet QYLabel *zan;
+@property (nonatomic, strong) NSString *str1;
+
+
+@property (nonatomic, assign) NSInteger count;
 
 @end
 
@@ -24,9 +30,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //闭包回调打印 
-    self.myLabel.userStringTapHandler = ^(UILabel *label,NSString *string,NSRange range){
-        NSLog(@"string = %@,range.location = %lu,range.length = %lu",string,range.location,range.length);
-    }; 
+    self.myLabel.userStringTapHandler = ^(UILabel *label,NSString *string,NSRange range,NSInteger matchCount){
+        NSLog(@"string = %@,range.location = %lu,range.length = %lu,matchCount = %lu",string,range.location,range.length,matchCount);
+    };
+    
+    self.zan.userStringTapHandler = ^(UILabel *label,NSString *string,NSRange range,NSInteger matchCount){
+        NSLog(@"string = %@,range.location = %lu,range.length = %lu,matchCount(匹配到的个数) = %lu",string,range.location,range.length,matchCount);
+        self.count = matchCount;
+    };
 
 }
 
@@ -63,9 +74,12 @@
 //添加自定义字符匹配
 - (IBAction)addMyString:(id)sender {
     
-    if (self.myTextFidle.text.length > 0 && ![self.myTextFidle.text isEqual: @""]) {
-        [self.myLabel.addStringM addObject:self.myTextFidle.text];
-        self.myLabel.text = [NSString stringWithFormat:@"%@%@",self.myTextFidle.text,self.myLabel.text];
+    if (self.textField.text.length > 0 && ![self.textField.text isEqual: @""]) {
+        [self.zan.addStringM addObject:[NSString stringWithFormat:@"%@、",self.textField.text]];
+        self.str1 = self.str1 == nil? self.textField.text : [NSString stringWithFormat:@"%@、%@",self.textField.text,self.str1];
+
+        self.zan.text = [NSString stringWithFormat:@"%@、觉得很赞",self.str1];
+
         
     }
 }

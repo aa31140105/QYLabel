@@ -17,71 +17,77 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qla-lx-4Y3">
-                                <rect key="frame" x="20" y="86" width="70" height="30"/>
-                                <state key="normal" title="匹配##"/>
-                                <connections>
-                                    <action selector="matchTopic:" destination="BYZ-38-t0r" eventType="touchUpInside" id="STv-QF-6LH"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYg-uz-Bkr">
-                                <rect key="frame" x="136" y="86" width="79" height="30"/>
-                                <state key="normal" title="取消匹配##"/>
-                                <connections>
-                                    <action selector="cancelTopic:" destination="BYZ-38-t0r" eventType="touchUpInside" id="go5-70-5eY"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qLX-8f-ggK">
-                                <rect key="frame" x="146" y="152" width="104" height="30"/>
-                                <state key="normal" title="取消匹配@用户"/>
-                                <connections>
-                                    <action selector="cancelUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TeY-ze-3sF"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cnj-2B-63x">
-                                <rect key="frame" x="25" y="152" width="74" height="30"/>
-                                <state key="normal" title="匹配@用户"/>
-                                <connections>
-                                    <action selector="matchUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tjY-cb-3tE"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作者:@aa31140105 话题:#Label字符串识别# 网址:https://github.com/aa31140105/QYLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="STU-Bk-mxp" customClass="QYLabel">
                                 <rect key="frame" x="0.0" y="323" width="375" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hdx-ol-1Cs">
-                                <rect key="frame" x="263" y="86" width="102" height="30"/>
-                                <state key="normal" title="设置随机颜色"/>
-                                <connections>
-                                    <action selector="matchTextColor:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qDO-oz-9XM"/>
-                                </connections>
-                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="brl-d6-6S3" customClass="QYLabel">
+                                <rect key="frame" x="0.0" y="517" width="375" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SQu-Hh-REY">
+                                <rect key="frame" x="25" y="623" width="174" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Tm-71-Bre">
-                                <rect key="frame" x="244" y="546" width="111" height="30"/>
+                                <rect key="frame" x="218" y="622" width="111" height="30"/>
                                 <state key="normal" title="添加自定义字符"/>
                                 <connections>
                                     <action selector="addMyString:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ltf-ui-6aN"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BFJ-At-fpc">
-                                <rect key="frame" x="20" y="547" width="206" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x8b-vE-8uP">
-                                <rect key="frame" x="136" y="224" width="90" height="30"/>
-                                <state key="normal" title="取消匹配链接"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1x-CW-eL4">
+                                <rect key="frame" x="39" y="111" width="72" height="30"/>
+                                <state key="normal" title="匹配#...#"/>
                                 <connections>
-                                    <action selector="cancelLink:" destination="BYZ-38-t0r" eventType="touchUpInside" id="POP-d4-8Kd"/>
+                                    <action selector="matchTopic:" destination="BYZ-38-t0r" eventType="touchUpInside" id="x7b-We-3vD"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M3k-ng-i16">
-                                <rect key="frame" x="25" y="224" width="60" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yni-xi-csT">
+                                <rect key="frame" x="39" y="154" width="72" height="30"/>
+                                <state key="normal" title="匹配@..."/>
+                                <connections>
+                                    <action selector="matchUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="V0X-H7-NZj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Osz-wC-CGJ">
+                                <rect key="frame" x="39" y="192" width="72" height="30"/>
                                 <state key="normal" title="匹配链接"/>
                                 <connections>
-                                    <action selector="matchLink:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Aj7-7z-NVI"/>
+                                    <action selector="matchLink:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FnM-YF-1nO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zDl-OQ-7a0">
+                                <rect key="frame" x="131" y="57" width="99" height="30"/>
+                                <state key="normal" title="设置随机颜色"/>
+                                <connections>
+                                    <action selector="matchTextColor:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mbt-Fk-jhf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eYV-oa-RVz">
+                                <rect key="frame" x="165" y="111" width="128" height="30"/>
+                                <state key="normal" title="取消匹配#...#"/>
+                                <connections>
+                                    <action selector="cancelTopic:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qlx-XA-yEg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dM1-A1-y07">
+                                <rect key="frame" x="165" y="154" width="116" height="30"/>
+                                <state key="normal" title="取消匹配@..."/>
+                                <connections>
+                                    <action selector="cancelUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Jom-cL-36Z"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zWL-JB-XQk">
+                                <rect key="frame" x="177" y="192" width="93" height="30"/>
+                                <state key="normal" title="取消匹配链接"/>
+                                <connections>
+                                    <action selector="cancelLink:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aGl-VT-N5p"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -89,14 +95,18 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="STU-Bk-mxp" secondAttribute="trailing" id="5df-Uj-8bS"/>
                             <constraint firstItem="STU-Bk-mxp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Kkk-Ux-CGd"/>
+                            <constraint firstAttribute="trailing" secondItem="brl-d6-6S3" secondAttribute="trailing" id="TzT-bs-kN7"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="brl-d6-6S3" secondAttribute="bottom" constant="150" id="V61-7W-yrM"/>
                             <constraint firstItem="STU-Bk-mxp" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="dd4-g5-PxU"/>
+                            <constraint firstItem="brl-d6-6S3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="rpI-HU-hbz"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="KFZ-m9-Db0"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="myLabel" destination="STU-Bk-mxp" id="Uf9-Pn-10t"/>
-                        <outlet property="myTextFidle" destination="BFJ-At-fpc" id="h9C-fc-BKM"/>
+                        <outlet property="textField" destination="SQu-Hh-REY" id="VrG-dN-yVH"/>
+                        <outlet property="zan" destination="brl-d6-6S3" id="Djr-WX-HzV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

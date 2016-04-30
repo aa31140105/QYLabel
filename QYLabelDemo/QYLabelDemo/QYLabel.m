@@ -23,9 +23,6 @@ typedef enum {
 @property (nonatomic, strong) NSTextContainer *textContainer;
 
 //用于记录下标值(NSTextCheckingResult数组)
-//@property (nonatomic, strong) NSArray *linkRanges;
-//@property (nonatomic, strong) NSArray *userRanges;
-//@property (nonatomic, strong) NSArray *topicRanges;
 @property (nonatomic, strong) NSMutableArray *userString;
 
 //记录用户选择的range
@@ -110,7 +107,6 @@ typedef enum {
 -(void)setText:(NSString *)text{
     //写super很重要
     [super setText:text];
-
     [self prepareText];
 }
 
@@ -220,10 +216,7 @@ typedef enum {
     [attrStringM addAttribute:NSFontAttributeName value:self.font range:NSMakeRange(0, attrStringM.length)];
 //    设置textStorage的内容
     [self.textStorage setAttributedString:attrStringM];
-    NSLog(@"%@",self.textStorage.string);
 
-
-    
     //匹配自定义字符串
     [self.addStringM removeObjectsInArray:@[@"@[\\u4e00-\\u9fa5a-zA-Z0-9_-]*",@"@[\\u4e00-\\u9fa5a-zA-Z0-9_-]*"]];
     [self.userString removeAllObjects];
@@ -233,11 +226,23 @@ typedef enum {
         [self.addStringM removeObject:@"@[\\u4e00-\\u9fa5a-zA-Z0-9_-]*"];
     }
     
+
+    
     if (self.showTopic == YES) {
         [self.addStringM insertObject:@"#.*?#" atIndex:0];
     }else {
         [self.addStringM removeObject:@"#.*?#"];
     }
+
+    //_addStringM去重
+    NSMutableArray *categoryArray = [[NSMutableArray alloc] init];
+    for (NSInteger i = 0; i < _addStringM.count; i++){
+        if ([categoryArray containsObject:_addStringM[i]] == NO){
+            [categoryArray addObject:_addStringM[i]];
+        }
+        
+    }
+    _addStringM = categoryArray;
     
     if (_addStringM.count > 0 || self.showLink == YES) {
         
@@ -250,11 +255,23 @@ typedef enum {
             [self.userString removeObject:[self getLinkRanges]];
         }
         
+        //userString去重
+        NSMutableArray *arrayM = [[NSMutableArray alloc] init];
+        for (NSInteger i = 0; i < self.userString.count; i++){
+            if ([arrayM containsObject:self.userString[i]] == NO){
+                [arrayM addObject:self.userString[i]];
+            }
+        }
+        self.userString = arrayM;
+        
+        self.matchCount = 0;
+        
         for (NSArray *arrar in self.userString) {
             
             for (NSTextCheckingResult *res in arrar) {
                 NSRange range = res.range;
                 [self.textStorage addAttribute:NSForegroundColorAttributeName value:self.matchTextColor range:range];
+                self.matchCount++;
             }
         }
     }else {
@@ -375,7 +392,7 @@ typedef enum {
     switch (self.tapHandlerType) {
         case userStringHandle:
             if (self.userStringTapHandler != nil) {
-                self.userStringTapHandler(self,contentText,self.selectRange);
+                self.userStringTapHandler(self,contentText,self.selectRange,self.matchCount);
             }
             break;
             
@@ -405,7 +422,6 @@ typedef enum {
         }
     }
     
-
     return NSMakeRange(0, 0);
 }
 
