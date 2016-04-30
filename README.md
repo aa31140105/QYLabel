@@ -66,3 +66,6 @@
 }
 
 @end
+
+####截图
+![image](https://github.com/aa31140105/QYLabel/blob/master/QYLabelDemo/QYLabelDemo/Screenshot/2CB93FEA-DB6E-47A4-8A9C-BE027DB3466E.png)
